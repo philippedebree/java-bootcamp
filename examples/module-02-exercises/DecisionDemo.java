@@ -7,14 +7,10 @@ public class DecisionDemo {
         System.out.print("Score (0-100): ");
         int score = Integer.parseInt(scanner.nextLine());
 
-        if (score >= 90){
-            System.out.println("Grade: A");
-        } else if (score >= 80) {
-            System.out.println("Grade: B");
-        } else if (score >= 70) {
-            System.out.println("Grade: C");
-        } else {
-            System.out.println("Grade: F");
+        if (score >= 90){   System.out.println("Grade: A");
+        } else if (score >= 80) {   System.out.println("Grade: B");
+        } else if (score >= 70) {   System.out.println("Grade: C");
+        } else {    System.out.println("Grade: F");
         }
 
         System.out.print("Day number (1-7): ");
