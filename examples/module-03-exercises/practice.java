@@ -1,6 +1,12 @@
 class Person {
     private String name; private int age;
 
+    //Default constructor
+    public Person(){
+        name = "unknown"; age = 0;
+    }
+
+    //Paramaterized constructor
     public Person(String name, int age){
         this.name = name; this.age = age;
     }
@@ -9,14 +15,14 @@ class Person {
         System.out.println("Hello!");
     }
 
-    public int getAge() { return age;}
+    public String getName() { return name;}
 }
 
 
 public class practice {
     public static void main(String[] args){
-        Person p1 = new Person("Alice", 21);
+        Person p1 = new Person();
         p1.introduce();
-        System.out.println(p1.getAge());
+        System.out.println(p1.getName());
     }
 }
