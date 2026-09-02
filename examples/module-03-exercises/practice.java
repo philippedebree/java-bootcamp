@@ -1,28 +1,40 @@
-class Person {
-    private String name; private int age;
+class Animal {
+    String name;
 
-    //Default constructor
-    public Person(){
-        name = "unknown"; age = 0;
+    void eat() {
+        System.out.println("Eating...");
     }
 
-    //Paramaterized constructor
-    public Person(String name, int age){
-        this.name = name; this.age = age;
+    void sleep(){
+        System.out.println("Sleeping....");
     }
+}
 
-    public void introduce(){
-        System.out.println("Hello!");
+class Dog extends Animal{
+    String breed;
+
+    void bark(){
+        System.out.println("Barking....");
     }
+}
 
-    public String getName() { return name;}
+class Vehicle {
+    String brand;
+    Vehicle(String brand) { this.brand = brand;}
+}
+
+class Car extends Vehicle {
+    int numDoors;
+    Car(String brand, int numDoors){
+        super(brand);
+        this.numDoors = numDoors;
+    }
 }
 
 
 public class practice {
     public static void main(String[] args){
-        Person p1 = new Person();
-        p1.introduce();
-        System.out.println(p1.getName());
+        Vehicle vroom = new Vehicle( brand = "Toyota");
+        System.out.println(Vehicle.brand);
     }
 }
