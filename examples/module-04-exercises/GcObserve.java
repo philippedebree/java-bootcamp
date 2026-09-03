@@ -1,0 +1,19 @@
+public class GcObserve {
+    public static void main(String[] args) {
+        long checksum = 0;
+
+        for (int round = 1; round <= 20; round++) {
+            byte[][] batch = new byte[200][];
+
+            for (int i = 0; i < batch.length; i++) {
+                batch[i] = new byte[64 * 1024];
+                checksum += batch[i].length;
+            }
+
+            if (round % 5 == 0) {
+                System.out.println("Completed round " + round);
+            }
+        }
+        System.out.println("Allocated bytes over time: " + checksum);
+    }
+}

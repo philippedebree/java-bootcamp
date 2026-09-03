@@ -1,0 +1,22 @@
+Exercise 1
+
+1.) main frame is created.\
+2.) Person is allocated; main.person refers to it.\
+3.) Calling printPerson creates a second frame.\
+4.) Both frames temporarily hold references to the same Person.\
+5.) printPerson returns; its frame is removed.\
+6.) main returns; its frame is removed.
+
+
+Exercise 2
+
+An object is not collectible merely because one reference becomes null.
+It becomes GC-eligible only when no live strong-reference path can reach it.
+Eligibility does not guarantee immediate collection, and System.gc() is only
+a request.
+
+Exercise 3
+
+The program allocated about 250 MB over time despite a 64 MB maximum heap.
+GC log entries appeared between rounds. A before/after value that decreased
+shows that memory was reclaimed. Exact pause times varied on my machine.
