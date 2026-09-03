@@ -20,3 +20,12 @@ Exercise 3
 The program allocated about 250 MB over time despite a 64 MB maximum heap.
 GC log entries appeared between rounds. A before/after value that decreased
 shows that memory was reclaimed. Exact pause times varied on my machine.
+
+Exercise 4 
+
+Command:
+java -XX:+UseG1GC -Xms16m -Xmx64m -Xlog:gc GcObserve
+
+Evidence:
+The log began with "Using G1" and showed G1 evacuation pauses.
+The collector flag selects G1; it does not guarantee a particular pause time.
