@@ -37,15 +37,35 @@ public abstract class Account {
     }
 
     public void deposit(double amount) {
-        // TODO: reject amount <= 0; otherwise add amount to balance
-        throw new UnsupportedOperationException("TODO");
+        if (amount <= 0) {
+            //System.out.println("Amount must be larger then 0");
+            return;
+        }
+
+        balance += amount;
+        return;
+
     }
+        // Done: reject amount <= 0; otherwise add amount to balance
 
     public boolean withdraw(double amount) {
-        // TODO: reject amount <= 0
-        // TODO: totalDeduction = amount + calculateCharges(); fail if > balance
-        // TODO: subtract totalDeduction from balance; return true/false
-        throw new UnsupportedOperationException("TODO");
+        if (amount <= 0) {
+            //System.out.println("Insufficent funds to withdraw");
+            return false;
+        }
+
+        double totalDeduction = amount + calculateCharges();
+
+        if (totalDeduction > balance) {
+            return false;
+        }
+
+        balance -= totalDeduction;
+
+        return true;
+        // DONE: reject amount <= 0
+        // DONE: totalDeduction = amount + calculateCharges(); fail if > balance
+        // DONE: subtract totalDeduction from balance; return true/false;
     }
 
     public abstract void displayAccount();

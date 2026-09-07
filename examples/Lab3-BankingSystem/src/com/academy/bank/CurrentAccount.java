@@ -19,8 +19,8 @@ public class CurrentAccount extends Account implements Printable {
 
     @Override
     public double calculateCharges() {
-        // TODO: return transactionFee
-        throw new UnsupportedOperationException("TODO");
+        return transactionFee;
+        // DONE: return transactionFee
     }
 
     @Override

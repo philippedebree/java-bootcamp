@@ -28,38 +28,165 @@ public class BankService {
     }
 
     public void createCustomer() {
-        // TODO: read customerId / name / email / phone; reject duplicate IDs
-        // TODO: store new Customer; print "Customer Created Successfully."
-        throw new UnsupportedOperationException("TODO");
+        if (customerCount >= MAX_CUSTOMERS){
+            System.out.println("Customer limit reached.");
+        }
+
+        System.out.println("Customer ID: ");
+        String newCustomerID = scanner.nextLine();
+
+        if (findCustomer(newCustomerID) != null){
+            System.out.println("Customer ID already exists");
+            return;
+        }
+
+        System.out.println("Customer Name: ");
+        String newCustomerName = scanner.nextLine().trim();
+
+        System.out.println("Customer Email:");
+        String newCustomerEmail = scanner.nextLine().trim();
+
+        System.out.println("Customer Phone");
+        String newCustomerPhone = scanner.nextLine().trim();
+
+        customers[customerCount] = new Customer(newCustomerID, newCustomerName, newCustomerEmail, newCustomerPhone);
+        customerCount++;
+
+        System.out.println("Customer Created Successfully");
+        // DONE: read customerId / name / email / phone; reject duplicate IDs
+        // DONE: store new Customer; print "Customer Created Successfully."
     }
 
     public void createSavingsAccount() {
-        // TODO: read existing customer, initial balance, interest rate
-        // TODO: create SavingsAccount with nextAccountNumber++; store in accounts[]
-        throw new UnsupportedOperationException("TODO");
+        if (accountCount >= MAX_ACCOUNTS){
+            System.out.println("Account limi reached");
+            return;
+        }
+
+        Customer customer = readExistingCustomer();
+
+        if (customer == null){
+            return;
+        }
+
+        double initialBalance = readPositiveAmount("Intial Balance : ");
+        double interestRate = readPositiveAmount("Interest Rate : ");
+
+        String accountNumber = String.valueOf(nextAccountNumber++);
+
+        accounts[accountCount] = new SavingsAccount(
+                accountNumber,
+                initialBalance,
+                customer,
+                interestRate
+        );
+
+        accountCount++;
+
+        System.out.println("Savings Account created successfully");
+
+        // DONE: read existing customer, initial balance, interest rate
+        // DONE: create SavingsAccount with nextAccountNumber++; store in accounts[]
     }
 
     public void createCurrentAccount() {
-        // TODO: read existing customer, initial balance, transaction fee
-        // TODO: create CurrentAccount with nextAccountNumber++; store in accounts[]
-        throw new UnsupportedOperationException("TODO");
+        if (accountCount >= MAX_ACCOUNTS){
+            System.out.println("Account limit reached");
+            return;
+        }
+
+        Customer customer = readExistingCustomer();
+
+        if (customer == null){
+            return;
+        }
+
+        double initialBalance = readPositiveAmount("Intial Balance : ");
+        double transactionFee = readPositiveAmount("Transcation Fee : ");
+
+        String accountNumber = String.valueOf(nextAccountNumber++);
+
+        accounts[accountCount] = new CurrentAccount(
+                accountNumber,
+                initialBalance,
+                customer,
+                transactionFee
+        );
+
+        accountCount++;
+
+        System.out.println("Savings Account created successfully");
+
+        // DONE: read existing customer, initial balance, transaction fee
+        // DONE: create CurrentAccount with nextAccountNumber++; store in accounts[]
     }
 
     public void deposit() {
-        // TODO: read existing account + amount; account.deposit; recordTransaction DEPOSIT
-        // TODO: print updated balance
-        throw new UnsupportedOperationException("TODO");
+        Account account = readExistingAccount();
+
+        if (account == null){
+            return;
+        }
+
+        double amount = readPositiveAmount("Deposit Amount : ");
+
+        account.deposit(amount);
+
+        recordTransaction(account.getAccountNumber(), amount, "DEPOSIT");
+
+        System.out.println("Deposit Successful");
+        System.out.println("Updated Balance : " + account.getBalance());
+
+
+        // DONE: read existing account + amount; account.deposit; recordTransaction DEPOSIT
+        // DONE: print updated balance
     }
 
     public void withdraw() {
-        // TODO: read existing account + amount; account.withdraw; record on success
-        // TODO: for CurrentAccount, print fee + total deducted; print updated balance
-        throw new UnsupportedOperationException("TODO");
+        Account account = readExistingAccount();
+
+        if (account == null){
+            return;
+        }
+
+        double amount = readPositiveAmount("Withdraw Amount: ");
+
+        if (account.withdraw(amount) == false){
+            System.out.println("Insufficent Funds to Withdraw");
+            return;
+        }
+
+        recordTransaction(account.getAccountNumber(), amount, "WITHDRAWAL");
+
+        if (account instanceof CurrentAccount){
+            System.out.println("Is a CurrentAccount");
+            CurrentAccount currentAccount = (CurrentAccount) account;
+            double fee = currentAccount.getTransactionFee();
+            double totalDeducted = amount + fee;
+
+            System.out.println("Withdraw: " + totalDeducted);
+            System.out.println("Updated Balance : " + account.getBalance());
+        } else {
+            System.out.println("Withdraw: " + amount);
+        }
+
+        System.out.println("Updated Balance : " + account.getBalance());
+
+        // DONE: read existing account + amount; account.withdraw; record on success
+        // DONE: for CurrentAccount, print fee + total deducted; print updated balance
     }
 
     public void displayAccounts() {
-        // TODO: if empty print message; else loop displayAccount() for each
-        throw new UnsupportedOperationException("TODO");
+        if (accountCount == 0 ){
+            System.out.println("There are no accounts.");
+            return;
+        }
+
+        for (int i = 0; i < accountCount; i++){
+            accounts[i].displayAccount();
+            System.out.println("----------------------------------");
+        }
+        // DONE: if empty print message; else loop displayAccount() for each
     }
 
     public void displayCustomers() {
