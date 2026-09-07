@@ -35,24 +35,76 @@ public class PerformanceTest {
         long memoryBefore = MemoryMonitor.getUsedMemoryBytes();
         long start = System.nanoTime();
 
-        // TODO: allocate SampleObject[count], fill each slot
-        // TODO: measure elapsed ms + memoryUsed; printf row; null array + GC
-        throw new UnsupportedOperationException("TODO");
+        SampleObject[] objects = new SampleObject[count];
+
+        for (int i =0; i < count; i++){
+            objects[i] = new SampleObject(i);
+        }
+
+        long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+        long memoryUsed = MemoryMonitor.getUsedMemoryBytes() - memoryBefore;
+
+        double memoryUsedMB = memoryUsed / (1024.0 * 1024.0);
+
+        System.out.printf(
+                "%-12d %-14.2f MB %-18d ms%n",
+                count,
+                memoryUsedMB,
+                elapsedMs
+        );
+
+
+        objects = null;
+
+        MemoryMonitor.triggerGarbageCollection();
+
+        // DONE: allocate SampleObject[count], fill each slot
+        // DONE: measure elapsed ms + memoryUsed; printf row; null array + GC
     }
 
     private static void measureLoopExecution() {
-        // TODO: loop 10_000_000 iterations summing i into sum; print elapsed ms
-        throw new UnsupportedOperationException("TODO");
+        long start = System.nanoTime();
+        long sum = 0;
+
+        for (long i = 0; i < 10_000_000; i++){
+            sum += i;
+        }
+
+        long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+
+        System.out.printf("Loop Exection (10M iterations) : %d ms | sum = %d%n", elapsedMs, sum);
+
+        // DONE: loop 10_000_000 iterations summing i into sum; print elapsed ms
     }
 
     private static void measureArrayAllocation() {
-        // TODO: allocate int[1_000_000], fill with i, print elapsed ms
-        throw new UnsupportedOperationException("TODO");
+        long start = System.nanoTime();
+        int[] numbers = new int[1_000_000];
+
+        for (int i = 0; i < numbers.length; i++){
+            numbers[i] = i;
+        }
+
+        long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+
+        System.out.printf("int[1_000_000] allocation : %d ms", elapsedMs);
+
+        // DONE: allocate int[1_000_000], fill with i, print elapsed ms
     }
 
     private static void measureLargeByteArray() {
         MemoryMonitor.printMemoryReport("Before Large byte[]");
-        // TODO: allocate 10 MB byte[]; print After report; null + GC; print After Releasing
-        throw new UnsupportedOperationException("TODO");
+
+        byte[] data = new byte[10 * 1024 * 1024];
+
+        MemoryMonitor.printMemoryReport("After Large byte[]");
+
+        data = null;
+
+        MemoryMonitor.triggerGarbageCollection();
+
+        MemoryMonitor.printMemoryReport("After Releasing");
+
+        // DONE: allocate 10 MB byte[]; print After report; null + GC; print After Releasing
     }
 }

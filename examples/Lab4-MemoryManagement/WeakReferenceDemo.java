@@ -1,3 +1,5 @@
+import java.lang.ref.WeakReference;
+
 public class WeakReferenceDemo {
 
     public static void main(String[] args) {
@@ -12,8 +14,18 @@ public class WeakReferenceDemo {
 
         System.out.println();
         System.out.println("--- Weak Reference ---");
-        // TODO: create Person weakTarget; wrap in WeakReference<Person>
-        // TODO: null weakTarget; trigger GC; print WeakReference.get() result
-        throw new UnsupportedOperationException("TODO");
+        Person weakTarget = new Person("Weak User", 30);
+        WeakReference<Person> weakRef = new WeakReference<>(weakTarget);
+
+        System.out.println(weakRef.get());
+
+        weakTarget = null;
+
+        System.gc();
+
+        System.out.println(weakRef.get());
+
+        // DONE: create Person weakTarget; wrap in WeakReference<Person>
+        // DONE: null weakTarget; trigger GC; print WeakReference.get() result
     }
 }
