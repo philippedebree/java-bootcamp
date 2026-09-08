@@ -1,0 +1,18 @@
+2026-09-08 12:11:09 ERROR Account not found: 1234
+AccountNotFoundException Account not found: 1234
+[com.academy.atm.ATMService.findAccount(ATMService.java:222), com.academy.atm.ATMService.login(ATMService.java:47), com.academy.atm.Main.main(Main.java:32)]
+2026-09-08 12:11:42 INFO Login Successful for account 1001
+2026-09-08 12:11:59 ERROR Requested 20000.0 Balance 11000.0
+InsufficientFundsException Transaction Failed. Insufficient Account Balance.
+[com.academy.atm.Account.withdraw(Account.java:50), com.academy.atm.ATMService.lambda$withdraw$1(ATMService.java:94), com.academy.atm.ATMService.executeTransaction(ATMService.java:170), com.academy.atm.ATMService.withdraw(ATMService.java:91), com.academy.atm.Main.main(Main.java:34)]
+2026-09-08 12:12:10 ERROR Amount must be greater than zero.
+InvalidAmountException Amount must be greater than zero.
+[com.academy.atm.Account.deposit(Account.java:39), com.academy.atm.ATMService.lambda$deposit$0(ATMService.java:83), com.academy.atm.ATMService.executeTransaction(ATMService.java:170), com.academy.atm.ATMService.deposit(ATMService.java:80), com.academy.atm.Main.main(Main.java:33)]
+2026-09-08 12:12:17 INFO Deposit completed successfully | Execution Time: 1973 ms
+2026-09-08 12:12:24 ERROR Invalid menu option: abc
+NumberFormatException For input string: "abc"
+[java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67), java.base/java.lang.Integer.parseInt(Integer.java:662), java.base/java.lang.Integer.parseInt(Integer.java:778), com.academy.atm.Main.main(Main.java:22)]
+2026-09-08 12:12:37 INFO Mini Statement completed successfully | Execution Time: 3 ms
+2026-09-08 12:13:09 ERROR Invalid PIN entered.
+InvalidPinException Invalid PIN entered.
+[com.academy.atm.ATMService.login(ATMService.java:52), com.academy.atm.Main.main(Main.java:32)]
