@@ -1,0 +1,28 @@
+package com.northstar.crm.controller;
+
+import com.northstar.crm.dto.CustomerRequest;
+import com.northstar.crm.dto.CustomerResponse;
+import com.northstar.crm.service.CustomerService;
+
+/**
+ * Presentation/API boundary. Lab 8: stub only (no HTTP framework yet).
+ * Later: Spring MVC maps HTTP onto these methods.
+ */
+public class CustomerController {
+
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    public CustomerResponse createCustomer(CustomerRequest request) {
+        return customerService.create(request);
+        // DONE: delegate to customerService.create(request) — no SQL / files here
+    }
+
+    public CustomerResponse getCustomer(String customerId) {
+        return customerService.getById(customerId);
+        // DONE: delegate to customerService.getById(customerId)
+    }
+}
