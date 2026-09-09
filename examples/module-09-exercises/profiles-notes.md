@@ -1,9 +1,9 @@
 # Profiles notes (Exercise 2)
 
 | Profile | Purpose | How activated |
-| ------- | ------- | ------------- |
-| dev | | |
-| prod | | |
+| ------- | ------- |---------------|
+| dev | |               |
+| prod | | Activate `prod` intentionally with `-Pprod`.              |
 
 ## activeByDefault risks
 
@@ -11,4 +11,4 @@
 
 ## Secrets rule
 
-<!-- TODO: never commit passwords in profiles -->
+Never store real production secrets in `pom.xml` profiles.

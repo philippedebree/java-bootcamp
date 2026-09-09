@@ -1,0 +1,49 @@
+09-04-2026 Module 6 Streams and Functional Programming
+
+eg int sum = number.stream()
+             .filter(n -> n > 2)
+             .map(n -> n * n)
+             .reduce(0, Integer::sum);
+
+             ^ instead of a for loop, n > 2 square it and then add that square number to a sum
+
+Stream of steps with functions -> Functional programming
+
+Why Stream?
+    - Multiple data sources, so convert to stream to make all usable in same way
+    - Intermediate operations (filter, map, etc)
+    - Terminal Operations (forEach(), collect(), reduce())
+        - Intermediate Operations wait for a terminal operation
+    - More efficient, optimized for performance, can leverage parallelism
+    - Enable declarative, readable and efficient data processing
+
+Core principles
+    - Functions as first-class citizens
+    - Immutability, prefer and avoid changing state
+    - Should not modify external state, pure functions
+
+Lambda Functions
+    - Method without a name
+        - (Parameters) -> expression
+        - (Parameters) -> { statements;}
+        - can Type declare (int x) -> x + 10
+
+    - Functional interface, an interface with a single abstract method
+    - Lambda Expression, provides the implementation
+    - Runtime, Lambda is converted to an instance of the functional interface
+    - Execution
+
+
+Intermediate Operations are executed only when a terminal operation is invoked
+
+
+Mapping data with streams
+    - map()
+    - flatMap(), for nested collections or expanding data
+
+
+Reduce()
+    - Combine elements of a stream into a single result using an identity value and an associative accumulation function
+
+
+

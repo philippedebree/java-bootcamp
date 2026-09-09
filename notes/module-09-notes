@@ -1,0 +1,111 @@
+09-09-2026 Build and Dependency Management with Maven
+
+Maven and Gradle as common Dependency management platforms
+
+Maven (Slide 3, Overview of What is)
+    - Manages dependencies, builds, packaging, ang testing.
+    - Build automation and dependency management tool for Java Projects
+
+    - Project Object Model
+    - Build Lifecycle
+    - Plugin Engine
+
+    - Output: Compiled classes, Test Reports, JAR/WAR
+
+    - Always checks local repos first then falls back to remote repos
+
+    - Local
+    - Maven Central - default public repo, operated by Sonatype
+    - Third-Party Repo (Google, JBoss)
+    - Corporate/Private
+
+
+Project Coordinates
+    - groupId : artifactId : version : scope
+    - eg com.example:my-app:1.0.0:compile
+    - scopes: compile (Default), provided, runtime, test, system
+
+Dependencies
+    - Inputted into xml file, can exclude transitive dependencies with <exclusion></exclusion>
+    - Direct vs Transitive, direct = you declare it, transitive = pulled in by a dependency you declared
+    - sample command: mvn org.apache.maven.plugins:maven-dependency-plugin:3.11.0:add -Dgav=org.apache.commons:commons-lang3:3.17.0
+    - Maven Conflict Resolver, nearest definition wins or use dependencyManagement
+
+Plugins
+    - extend Maven's build lifecycle, provide goals that compile code, run tests, package, generate reports
+    - bound to a phase, Maven bounds to a lifecycle phase
+    - During build, in phase order
+    - eg maven-compiler-plugin, compiles java source code
+    - live in the <build></build> section of the xml file
+
+Build Profiles
+    - dev, test, prod, switch build configuration for different env without editing the POM itself
+    - each live within <profile> block inside of <profiles>
+    - <id> and <properties>
+    - confirm with mvn help:active-profiles
+
+Lifecycle
+    - mvn validate
+        - Project structure and POM correctness
+        - Everything required is declared
+        - Repos and Settings are accessible
+    - mvn compile
+        - Compiles source code into bytecode
+        - Processes resources
+        - Reports compilation errors and warnings
+        - Places compiled classes in output
+    - mvn test
+        - Executes unit tests (JUnit, TestNG)
+        - Generates reports
+        - Reports test failures
+        - Stores test results
+    - mvn package
+        - bundles compiled coded and resources into a JAR/WAR and creates
+        - includes manifest and metadata
+        - places artifact in target dir
+    - mvn verify
+        - runs any verification goals bound in the POM (Integration tests, coverage checks, style checks, security scans)
+        - ensures artifact is ready for installation
+    - mvn install or mvn deploy
+        - local vs remote
+
+Dependency Scopes
+    - Scopes define the purpose and visibility of a dependency across compile/test/runtime/packaged classpaths
+    - compile, full lifecycle
+    - provided, purely for testing
+    - runtime, starts only on testing onwards, not required for compilation
+    - test, only for test
+    - system, not recommended, only up until runtime
+    - <scope> within <dependency>
+
+Transitive Dependencies
+    - Resolved automatically and added to classpath
+    - Maven handles version conflicts using the nearest definition wins rule
+    - Don't need to declare explicitly
+    - Declare only what your project directly needs
+
+Reading Dependency tree
+    - mvn dependency:tree
+    - +- / \- mark a direct or last child; | shows a sibling.
+    - each line ends with its scope (compile, test, runtime etc)
+
+Resolving Conflicts
+    - Maven picks version nearest to your POM
+    - Override via a direct dependency
+    - mvn dependency:tree (-DIncludes=..., -Dverbose shows every version considered)
+
+DependencyManagement
+    - declares a version without adding the dep to the build
+
+(Slide 50 for Enterprise Build Pipeline)
+
+Useful commands
+    - mvn clean install
+    - mvn dependency:tree
+    - mvn help:effective-pom
+    - mvn versions:display-dependency-updates
+    - ./mvnw clean verify, maven wrappers so every env builds with the same Maven version
+
+
+Parent POM and BOM imports
+    -

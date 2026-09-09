@@ -1,0 +1,68 @@
+09-04-2026 Module 7 Exception Handling and Error Management
+
+Exception
+    - An event that occurs during execution that disrupts the normal flow
+    - Checked - checked at compile time, must be handled or declared
+    - Unchecked - checked at runtime, not mandatory to handle, (NullPointerException, Arithmetic Exception)
+    - Errors - Beyond application control, (OOM, StackOverflow), usually cannot recover from
+
+    - Prevent pipeline termination due to bad data
+    - Handle close to its source, never with an empty catch block
+
+Throw
+    - Throw meaningful exceptions using throw keyword
+
+
+Checked Exceptions
+    - Verified at Compile Time
+    - Caught or Declared
+    - catch, error.getMessage();
+    - throws IOException (non customizable)
+
+Unchecked Exceptions
+    - subclasses of RuntimeException
+    - occur at runtime
+    - mostly logic bugs
+    - eg NullPointerException, ArithmeticException, ArrayIndexOutOfBoundsException
+
+finally
+    - need, to validate that the code beforehand ran
+    - used for cleanup
+    - if an exception occurs in finally, it can override a previous exception
+
+
+try-with-resources
+    - Automatically closes resources that implement AutoCloseable (File, Steam, Connection), at end of the try block
+    - vs finally, AutoCloseable resource (file, socket, DB connection) use try-with,
+        - Non-resource cleanup (resetting state, clearing a flag) -> use finally
+
+
+throw vs throws
+    - throw - used to explicitly throw an exception from a method or block
+        - creates an exception object and throws it
+    - throws - used in method signature to declare that method may throw one or more exception
+        - It does not throw the exception, it passes the responsibility to the caller (eg IOException)
+    - throws DECLARE IT (it may happen), throw DOES IT
+
+Exception propagation
+    - Exception propagates up method chain, if not caught in other methods passes all the way back up to main
+    - If no method catches it, the JVM handles it
+
+Error Handling Strategies
+    - Log and escalate when needed, put end user first with meaningful messages
+    - Recover or fail safely
+    - Detect error and then handle gracefully
+    - Be specific with errors
+
+    - Retry transient failures
+    - Fallback / Default
+    - Skip and Continue
+    - Fail Fast
+    - Graceful Degradation (reduce functionality but keep system available)
+    - Circuit Breaker
+
+Logging
+    - Any event failed or caught exception, should be logged
+    - SLF4J, import org.slf4j.logger and import org.slf4j.loggerFactory
+    - store in JSON format for clarity
+    - log destinations, eg AWS

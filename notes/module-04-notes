@@ -1,0 +1,96 @@
+09-03-2026 Module 4 Memory Management
+
+Memory Management always done automatically depending on approach
+    - Done by JVM
+
+Object no longer reference -> eligible for garbage collection
+
+Newly created objects -> New Generation
+    - Eden Space, slightly older into Survivor Space (s0, s1)
+
+Older -> Old Generation
+
+Mark -> Sweep -> Compact -> Repeat
+
+Metaspace - Class methods are stored here
+Thread Stacks - Variables stored here
+Code Cache - Compiled code and compilation (Source code -> Bytcode -> Binary)
+PC Registers - Program counter for threads
+Native Method Stack - Native Methods
+
+Tuning JVM parameters boost Performance
+    - Xms, Xmx, GC Type
+
+Avoid Memory Leaks
+    - Release unused objects and resources
+
+Memory Management Flow (Object Lifecycle)
+    - Request
+    - Use
+    - Reclaim by GC
+    - Memory return to system
+
+Memory Layout
+    - Stack - Local Variables, Function Calls
+        - Memory allocated and deallocated automatically, fast
+        - Size must be known at compile time
+    - Heap- Dynamic Memory
+        - Memory managed manually, slower
+        - Allocated with new keyword
+        - Size can be determined at runtime
+    - Data Segment - Global and Static Variables
+    - Text Segment - Code / Instructions
+
+Where does object live (Slide 7)
+
+Garbage Collection Triggers (Slide 8 Diagram)
+
+
+G1 Garbage Collector (GB - TB)
+    - Heap divided into fixed sized regions
+    - Continuously monitors region usage
+    - Selects regions with most garbage to reclaim
+    - Evacuation, copies live objects into other regions
+    - References updated
+
+    - Pause Time Goal, aims to keep pause times predictable and within user defined goal
+    - Most of the work done concurrently with threads
+
+Important JVM options
+    - XX:+UseG1GC
+    - XX:MacGCPauseMillis=<ms>
+    - XX:InitiatingHeap
+
+Sample run: java -XX:+UseG1GC -Xms16m -Xmx64m -Xlog:gc GcObserve
+    - -XX:+UseG1GC -- Specifies to use G1 GC
+    - -Xms16m -- Initial Heap around 16 MB
+    - -Xmx64m -- Maximum Heap around 64 MB
+    - -Xlog:gc -- Print GC Events
+
+
+
+ZGC (Z Garbage Collector) (TB)
+    - Ultra-low pause, scalable garbage collector for large heaps (TB Scale)
+    - 1-2ms pause times, ultra low pause // super low latency
+    - Cloud-native and containerized, microservices, real-time analytics, trading systems
+    - Trade off - Higher CPU overhead and more metadata memory
+
+
+java -XX:+UseZGC -Xms16m -Xmx64m -Xlog:gc FileToRun
+java -XX:+UseZGC -XX:+PrintCommandLineFlags -version
+
+
+Memory Leaks
+    - Objects no longer in use are still referenced, exists in heap but no reference in stack
+    - Increased memory usage, degrade performance, OutOfMemoryError (OOM)
+    - Ideal solution: delete object and then make null, if you make null first it will be unreachable = memory leak
+
+    - Detection Tools (VisualVM, Eclipse MAT, JProfiler / YourKit, GC Logs (-Xlog:gc*)
+
+    - Close resources in finally block or try-with-resources
+
+Diagnosing Memory Issues
+    - Identify Issues -> Capture Evidence -> Analyze -> Fix & Validate
+    - (SLIDE 21 for samples of capturing evidence -> then analyze with tools)
+
+

@@ -1,0 +1,55 @@
+09_01_2026 Module 2 Notes
+
+Syntax, set of rules that define how code is written and structured
+    - Syntax errors caught at compile
+
+Primitive data types
+    - Built in data types that store single values
+    - Fast allocation, stored in stack
+    - int
+    - long
+    - double
+    - char
+
+Categories
+    - Numeric
+        - Float, 6-7 decimals
+        - Double, 15-16 decimals
+        - bytes
+        - short
+        - int
+        - long
+    - Non-Numeric
+        - char
+        - boolean
+
+To study: hexadecimal
+
+Boolean defaults to false
+
+Reference Data Types
+    - Store a reference to objects in heap memory
+    - Multiple references can point to the same object
+
+Clearing reference = set reference to null
+    - data = null
+
+Type Conversion
+    - Implicit Conversion and Explicit Conversion
+    Implicit
+        - Easy to convert to a larger data type
+    Explicit
+        - Convert larger to smaller
+        - Possible data loss
+        Casting syntax
+            double d = 9.78;
+            int i = (int) d;
+
+
+Relational Operators
+    - Always compares left to right
+    - == can't be used on string since they're comparing addresses in memory, need to use .equals method instead
+    - name1.equals(name2) returns a boolean
+
+
+

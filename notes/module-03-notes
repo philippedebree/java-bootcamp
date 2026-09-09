@@ -1,0 +1,55 @@
+09-02-2026 OOP in Java
+
+Classes and Objects
+
+OOP is a programming paradigm that organizes software design around data, or objects, rather than functions and logic alone.
+
+Class - blueprint
+Object - instance of class
+    - Every object has a state (data), behaviour (methods), and Identity (unique)
+
+Convention first letter capital for Classes
+
+
+Constructor
+    - No return type
+    - same name as class
+    - Intialize starting values / objects in heap
+    - Possible to overload constructors (paramaterized vs default)
+
+    Person = new Person("Name", age);
+
+Encapsulation
+    - Only methods within a class can access private data
+    - Can't access data directly if designated private
+    - private data
+    - public methods
+    - state - data
+    - method - behavior
+
+Polymorphism
+    - Method overloading is a type of Polymorphism
+
+
+Getter and Setters
+    - Get, returns value, getMethodName
+    - Set, sets value, should put in checks for logic (eg setting age, age can't be 0), setMethodName
+
+Inheritance
+    - Super / parent classes
+    - Sub / child classes
+    - super KEYWORD, access superclass members and calls the superclass constructor
+
+Abstract Classes
+    - Cannot make objects of abstract classes
+
+Interface
+    - Blueprint of a class
+    - Class implements interface (rather than extends)
+
+SOLID PRINCIPLES
+    - Single Responsibility
+    - Open/Closed Principle
+    - Liskov Substitution Principle
+    - Interface Segregation Principle
+    - Dependency Inversion Principle

@@ -1,0 +1,76 @@
+09-08-2026 Module 8 Java Project Structure and Modularization
+
+- Covers Java/Maven project layout, package organization by responsibility, and structuring Spring Boot applications
+
+Layers
+    - Presentation Layer
+    - Business/Service Layer
+    - Persistence Layer
+    - Data Access / Repo Layer
+    - Integration Layer
+
+my-maven-project/
+src/main/java/                  // application source code
+src/main/resources/             // config, static files
+src/test/java/                  // unit + integration tests
+src/test/resources/             // test resource files
+pom.xml                         // Project Object Model: dependencies, plugins, build
+target/                         // build output (generated)
+.mvn/, mvnw, mvnw.cmd           // Maven Wrapper (optional)
+README.md
+
+
+package-by-layer vs package-by-feature
+    - layers
+        - UI Layer
+        - Service Layer
+        - DAO Layer
+        - Entity Layer
+        - Database Layer
+
+    - Dependencies point one way, Controller -> Service -> Repo
+
+DTO Package structure
+    - Data Transfer Objects move data between layers or across application boundaries without exposing entities
+    - Request DTOS validate input at the boundary; Response DTOs expose only what the client needs
+
+
+Entity Design guidelines (Slide 24)
+
+SLIDE 27 for overall structure
+
+Controller calls -> Service, uses the -> Repo interface, executes queries via JPA -> Database, returns rows as entities
+
+Repository
+    - Prefer interfaces and let Spring Data JPA provide the implementation
+    - Single responsibility, one repo per aggregate/entity
+
+Service
+    - Focus on single business concern
+
+Controller
+    - Root package for all REST controllers. Organized by feature/domain.
+
+Configuration
+    - Application configuration files
+    - Integration settings
+    - properties, datasource, security (securityConfig), web, app
+    - centralized, callable by all the layers
+
+    - group config by concern ^
+    - Profile, based setup
+    - @Configuration and @Bean
+    - @Validated, validate properties
+    - config only wires components
+
+Exception
+    - Custom exceptions used across the application, handled consistently through a global handler
+    - base, business, system, validation
+
+Request Flow (Slide 38)
+
+Dependency
+    - Controller -> Service -> Repo, dependencies point one way only
+
+
+

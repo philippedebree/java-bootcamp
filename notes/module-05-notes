@@ -1,0 +1,96 @@
+09-03-2026 Module 5 Java Collections Framework
+
+Iterable as root interface
+    - Collection extends iterable and is the root of Collections Framework
+
+    - List, Ordered and Duplicates allowed
+    - Set, no duplicates allowed
+    - Queue, Holding elements
+    - Deque, Double sided, add and remove from both sides of queue
+
+Abstract class, all abstract
+Concrete Class, some implemented and not implemented
+
+Type Safe, Generics for compile-time safety
+
+List Interface
+    - ArrayList
+        - Fast at random access
+        - Slow at insertion in middle
+    - LinkedList
+        - Pointer Items to other nodes
+        - (DoublyLinkedList, has pointers at beginning and end to before and after)
+        - Fast at insert and delete (update pointers)
+        - Slow at random access
+    - Vector (Legacy) --> ArrayList
+    - Stack (Legacy) --> Deque
+
+
+LinkedList
+    - null indicates end of list
+
+Set
+    - No duplicate elements
+    - one null allowed -> HashSet, LinkedHashSet
+    - Enumset, specialized set for enums
+
+    - General use, HashSet
+    - Insertion order, LinkedHashSet
+    - Sorted Order, EnumSet
+
+    - equals(), used to compare 2 sets
+    - not supported indexed access (no get or set)
+
+HashSet
+    - HashSet() -> Default capacity is 16, load factor of 0.75
+    - HashMap, key and value pairs (multiple values at one key)
+    - Each element is hashed
+    - Adding elements as linked list
+    - load factor, if capacity is greater than percentage of load factor, size of hashset increased (eg retrigger sizing on size > capacity x load factor)
+
+TreeSet
+    - Use when order matters
+    - Defaults to ascending order or custom comparator
+    - Comparator (O(logn)), eg TreeSet<String> set = new TreeSet<>(Comparator.reverseOrder());
+
+Map
+    -
+
+Mutability vs immutability
+    - Mutable classes, can change object, not thread-safe
+    - Immutable, state cannot change, any "change" creates a new object
+    (eg Stringbuilder = mutable, string concat is immutable ("new" objects are made)
+    - When to use which (Slide 44)
+
+
+Thread safe vs thread unsafe (Slide 40.2)
+    - Safe, multiple threads can access a shared resource concurrently without causing inconsistent state or data corruption
+        - Use synchronized keyword on class, only one thread can execute on section at a time (locks it off)
+        - Preference for parallel architecture
+    - Unsafe, opposite of above
+
+
+Iteration (slide 45)
+    - For Loop
+        - Only one that offers indexing
+        - Really only for Array and List
+    - For Each Loop
+        - Works on arrays, collections and maps
+    - Iterator
+        - Safe to use for removal
+    - ListIterator
+        - Can go forward and backward
+        - Safe to use for removal
+    - Stream API
+
+
+Java Collection Performance Comparison (Slide 48)
+    - What collection, what operation, at what time performance
+    - Tree diagram of decision (Slide 50)
+
+    - Hash-based offer best average performance
+    - Tree-based provide sorted order with log(n) operations
+    - ArrayList ideal for random access
+    - LinkedList for frequent insertions/deletions in the middle
+
+
