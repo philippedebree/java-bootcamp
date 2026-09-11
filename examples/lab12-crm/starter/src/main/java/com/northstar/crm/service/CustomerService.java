@@ -8,7 +8,65 @@ import java.util.List;
 
 /** INTENTIONALLY MESSY — refactor in later steps. Do not submit this style. */
 public class CustomerService {
-    List data = new ArrayList();
+    List<Customer> customers = new ArrayList<>();
+
+    public Customer createCustomer(
+            String id,
+            String name,
+            String email,
+            String phone,
+            String status
+    ) {
+        validateField(id, "id");
+        validateField(name, "name");
+
+        if (findByID(id) != null) {
+            throw new DuplicateCustomerException(id);
+        }
+
+        Customer customer = new Customer();
+        customer.setCustomerId(id);
+        customer.setFullName(name);
+        customer.setEmail(email);
+        customer.setPhone(phone);
+        customer.setStatus(status);
+        customer.setCreatedAt(LocalDateTime.now());
+
+        customers.add(customer);
+        return customer;
+    }
+
+    public Customer getCustomer(String id) {
+        validateField(id, "id");
+        Customer customer = findByID(id);
+        if (customer == null) {
+            throw new CustomerNotFoundException(id);
+        }
+        return customer;
+    }
+
+    // STILL NEED TO DO UPDATE STATUS
+
+    public Customer updateStatus(String id, String status) {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer x = (Customer) customers.get(i);
+            if (x.getCustomerId().equals(id)) { // BUG: == on strings
+                x.setStatus(status);
+                return x;
+            }
+        }
+        return null;
+    }
+
+    public validateField(String value, String fieldName) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException(fieldName + " is required");
+        }
+    }
+
+
+    ////////////////////////////////////////
+
 
     public Object doStuff(String a, String b, String c, String d, String e) {
         // a=id b=name c=email d=phone e=status-as-string
@@ -16,8 +74,8 @@ public class CustomerService {
             System.out.println("bad");
             return null;
         }
-        for (int i = 0; i < data.size(); i++) {
-            Customer x = (Customer) data.get(i);
+        for (int i = 0; i < customers.size(); i++) {
+            Customer x = customers.get(i);
             if (x.getCustomerId().equals(a)) {
                 System.out.println("dup");
                 return null;
@@ -34,11 +92,11 @@ public class CustomerService {
         else if (e != null && e.equals("CLOSED")) x.setStatus(CustomerStatus.CLOSED);
         else x.setStatus(CustomerStatus.PROSPECT);
         x.setCreatedAt(LocalDateTime.now());
-        data.add(x);
+        customers.add(x);
         System.out.println("ok " + a);
         if (b != null && b.contains("UPDATE")) {
-            for (int i = 0; i < data.size(); i++) {
-                Customer y = (Customer) data.get(i);
+            for (int i = 0; i < customers.size(); i++) {
+                Customer y = (Customer) customers.get(i);
                 if (y.getCustomerId().equals(a)) {
                     if (e != null && e.equals("ACTIVE")) y.setStatus(CustomerStatus.ACTIVE);
                     else if (e != null && e.equals("PROSPECT")) y.setStatus(CustomerStatus.PROSPECT);
@@ -50,9 +108,9 @@ public class CustomerService {
     }
 
     public Object get(String id) {
-        for (int i = 0; i < data.size(); i++) {
-            Customer x = (Customer) data.get(i);
-            if (x.getCustomerId() == id) { // BUG: == on strings
+        for (int i = 0; i < customers.size(); i++) {
+            Customer x = (Customer) customers.get(i);
+            if (x.getCustomerId().equals(id)) { // BUG: == on strings
                 return x;
             }
         }

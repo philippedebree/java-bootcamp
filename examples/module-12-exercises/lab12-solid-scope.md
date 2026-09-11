@@ -1,9 +1,16 @@
-# SOLID apply vs defer
+# Lab 12 — SOLID Apply vs Defer
 
-| Principle | Apply now? | Defer? | Why |
-| --------- | ---------- | ------ | --- |
-| S | | | |
-| O | | | |
-| L | | | |
-| I | | | |
-| D | | | |
+## Step 1 — Apply now
+
+Pick SRP: separate validation helper from persistence-shaped code in the sketch.
+
+## Step 2 — Defer
+
+Defer DIP wiring frameworks and ISP for large REST resource interfaces until Labs 13+.
+
+## Step 3 — Why defer
+
+One sentence: modules 10–12 stay before REST hosting; do not over-architect ports.
+
+## Scope
+Pre-lab only — do not finish the full graded lab in this exercise.

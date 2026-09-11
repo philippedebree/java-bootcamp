@@ -1,7 +1,23 @@
 # Lab 11 prep checklist
 
-- [ ] lab10-crm available (or starter copy plan)
-- [ ] Exercises 1–5 notes Pass
-- [ ] Review notes path known: `copilot-notes/ai-test-refactor-notes.md`
-- [ ] Reject trivial asserts / Spring Test
-- [ ] No secrets/PII in prompts
+## Fixtures (from memory — then verify)
+| ID | Name | Status |
+| -- | ---- |  |
+| CUS-1001 | Amina Khan |ACTIVE |
+| CUS-1002 | Ravi Singh | PROSPECT |
+
+## Earlier exercise files present?
+| File | Present? (yes/no) |
+| ---- |-------------------|
+| notes/lab11-aaa-template.md | yes               |
+| notes/lab11-notifier-extract-plan.md | yes               |
+| notes/lab11-prelab-asserts.md | yes               |
+| notes/lab11-acceptance-todos.md | yes               |
+| notes/lab11-coverage-gaps.md | yes               |
+
+## Scope statement
+Pre-lab only — prepare for lab; do not complete full Lab 11 now.
+
+## Self mark
+Overall prep: Pass / Fail
+If Fail, revisit exercise(s): Pass
