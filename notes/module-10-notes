@@ -1,0 +1,13 @@
+09-09-2026 GitHub Copilot Fundamentals
+
+CoPilot
+    - Powered by OpenAI Codex Models, trained on public code and best practices
+
+Prompt Engineering Fundamentals
+    - Great prompts = goal + context + constraints + expected output + edge cases + acceptance criteria.
+
+Generating service logic
+    -  Describe the service's responsibilities, methods, and key dependencies.
+    - Begin typing the class name or key methods — Copilot suggests the rest.
+    - Focus on business logic — Copilot fills in method bodies and structure.
+    - Review generated code and refine error handling and validations

@@ -1,0 +1,150 @@
+9-11-2025 REST API Design with Java
+
+
+Why REST matters
+    - enables systems to communicate over standard HTTP
+    - interoperability between different platforms and languages
+    - statelessness simplifies server design and improves scalability
+    - evolvability, can evolve with versioning while maintaining backward compatibility
+
+CRUD operations
+    - create - POST
+    - read - GET
+    - update - PUT/PATCH
+    - delete - DELETE
+
+API
+    - a published contract that lets one piece of software use another's functionality
+        - can use without seeing internals, promise about behaviour, not implementation
+    - producer and consumer
+    - Many styles: REST, SOAP, gRPC, GraphQL, etc.
+
+REST
+    - Representational State Transfer
+    - architectural style, set of constraints not protocol or standard
+    - stateless, every request must carry all the context the server needs, nothing is remembered between calls
+    - resources as representations, clients exchange representations (JSON) of server-side resources instead of manipulating them directly
+    - uses HTTP deliberately, instead of layering a new protocol on top of it
+        - no REST RFC (request for comments), only constraints to satisfy
+    - Maturity Levels
+        - Level 0-3, Level 2 general usage in the world, Level 3 is hypermedia driven, not widely used
+
+
+REST Constraints (Slide 14)
+    - Client-Server
+    - Stateless
+    - Cacheable
+    - Uniform Interface
+    - Layered System
+    - Code on Demand (optional)
+
+Client-Server Architecture
+    - Separation of concerns
+    - Independent evolution
+    - Portability (same API can server different clients)
+
+Cacheability (Slide 21)
+    - Tell clients and proxies how long a representation stays valid
+    - GET request can be cached until the record changes, cutting load on service
+    - explicit, not assumed, uncacheable resources must be marked as such
+
+Uniform Interface (SLide 23)
+    - REST defines a uniform way for clients to interact with resources.
+
+Layered System Architecture
+    - Separation of concerns, each layer has a specific role and interacts only with adjacent layers
+
+Resource Based API Design
+    - Resources, key business entities or concepts
+    - Each resource is identified by a unique URI, and is manipulated using standard HTTP methods
+
+Identifying API Resources
+    - Resources, nouns or business entities that your API exposes
+
+HTTP Request Structure
+    - Request Line
+        - Method with URI
+    - Headers
+        - Auth
+        - Content-Type
+        - Accept
+    - Body (optional)
+        - POST, PUT, PATCH carry a body
+        - GET and DELETE normally do not
+
+    - Header, blank line, request body
+
+HTTP Response Structure
+    - Status Line
+        - HTTP version, status code, reason phrase
+    - Headers
+        - Metadata about the response
+    - Body
+        - Contains actual data returned by the server
+
+HTTP Methods
+    - GET, POST, PUT, PATCH, DELETE
+        - PUT, Replace an entire resource
+        - PATCH, partial update
+    - Only GET is safe
+    - Idempotent
+        - operations that can be performed multiple time with the same effect
+
+HTTP Status Codes
+    - 1xx, Informational
+    - 2xx, Success
+        - 200 OK, 201 Created, 204 No Content
+    - 3xx, Redirection (further action is needed to complete the request)
+        - 301 Moved Permanently, 302 Found, 304 Not Modified
+    - 4xx, Client Error
+        - 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict
+    - 5xx, Server Error
+        - 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable
+
+Request and Response Samples (Slide 49)
+    - camelCase for field names
+    - nesting reflects structures
+
+Content-Type and Accept Headers
+    - describes what was sent, accept describes what the client is willing to receive
+    - header that describes the media type of the resource, e.g., application/json
+
+API Error response design
+    - One consistent JSON error shape lets every client handle every failure the same way
+    - Fields
+        - timestamp, status, error, message, path, traceId
+
+Pagination, filtering and sorting
+    - Pagination, breaks a large dataset into smaller chunks (Pages) so clients can load data efficiently
+    - Filtering, allows clients to request only the data that matches specific conditions, reducing payload size and improving performance
+        - eg GET /api/products?category=electronics&price<1000
+    - Sorting, allows clients to specify the order in which results are returned based on one or more fields
+        - eg GET /api/products?sort=price,asc&sort=name,desc
+        - always does the first sort first, then the second
+
+API Versioning
+    - a breaking chance needs a way to reach only the clients that are ready for it
+    - allows you to evolve your API over time without breaking existing clients
+    - URI versioning
+        - most common in the wild
+    - Header-Based Versioning
+        - better for internal APIs, clean URIs
+    - Query Parameter Versioning
+
+OpenAPI
+
+Request and Response Schemas
+    - define the structure, data types, and validation rules for the data sent to your API
+
+API-First vs Code-First
+    - API-First
+        - Contract First, generate stubs, then implement
+    - Code-First
+        - Write Spring controllers first, then generate OpenAPI from annotations
+
+
+
+
+
+
+

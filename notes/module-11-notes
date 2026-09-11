@@ -1,0 +1,42 @@
+9-10-2026 Github Copilot for Testing and Refactoring
+
+(Slide 3 as an overview)
+
+AAA Template for Status
+    - Arrange
+    - Act
+    - Assert
+
+Generating Edge Cases
+    - Ensures code is robust and works correctly under unusual or unexpected conditions
+    - one behavior, one assertion, one clear name
+
+    - Know your boundaries
+    - Think like a user
+        - how might they misuse it
+    - Happy and Sad Paths
+        - Success and failure scenarios
+    - Review and Refine
+
+Generating Mock Objects
+    - Suggests the right mock objects for your dependencies
+    - Generates stubs with default or custom return values
+    - Sets up interactions - calls, arguments, order
+    - Helps mock, exceptions, timeouts, and failures
+
+Verifying Mock Interactions
+    - verify() confirms a call actually happened - not just that the code compiled
+    - times(1) and never() catch missing or duplicate calls
+
+Refactor in small, tested steps - confirm behavior is unchanged before and after every change.
+
+Refactoring Quality
+    - Naming and Clarity
+    - Method/Class Size
+    - Duplication
+    - Coupling and Abstractions
+    - Domain Types (Slide 29)
+        - Use value objects and enums, not raw primitives
+        - public enum CustomerStatus{PROSPECT, ACTIVE, SUSPENDED, CLOSED}
+    - Tests and Behavior Preservation
+

@@ -1,0 +1,58 @@
+9-10-2026 Java Coding Standards and Best Practices
+
+SOLID / DRY
+Cyclomatic Complexity
+    - Measures the number of linearly independent paths through a program's source code
+    - High complexity can indicate code that is difficult to understand, maintain, and test
+    - Aim for low cyclomatic complexity to improve code quality and maintainability
+
+Naming Conventions (Slide 8)
+
+Here is a clean tabulation of the naming conventions:
+
+| Element | Convention | Example |
+|---|---|---|
+| Package | lowercase; reverse domain name | com.company.project |
+| Class / Interface | PascalCase; noun or noun phrase | OrderService |
+| Method | camelCase; verb or verb phrase | calculateTotalAmount() |
+| Variable | camelCase; meaningful, no encodings | customerCount |
+| Constant (static final) | UPPER_SNAKE_CASE; words separated by _ | MAX_RETRY_COUNT |
+| Enum type | PascalCase; noun, singular | PaymentStatus |
+| Type parameter | Single letter or descriptive if unclear | <T>, <K, V>, <TEntity> |
+| Field (instance) | camelCase; noun or noun phrase | orderRepository |
+| Enum constant | UPPER_SNAKE_CASE; words separated by _ | PAYMENT_COMPLETED |
+
+Class Design Principles
+    - represent a single responsibility
+    - hide internal state with private fields
+    - expose only essential details through public methods
+    - open/closed principle: classes should be open for extension but closed for modification
+    - favor composition over inheritance
+    - keep classes small
+
+    - SOLID
+
+Readability refactor
+    - int d; String n; BAD
+    - int daysSinceLastLogin; String customerName; GOOD
+
+Common Code Smells (Slide 28/29)
+
+Static Analysis Ecosystem
+    - SonarQube
+    - Checkstyle
+    - PMD
+    - SpotBugs
+
+IntelliJ Inspections
+    - Inspect Code: Ctrl+Alt+Shift+I
+    - Quick Fix: Alt+Enter
+    - Reformat Code: Ctrl+Alt+L
+    - Configure Inspections: Ctrl+Alt+S
+
+Code Review Principles (Slide 47)
+
+Defensive Programming at Trust Boundaries (Slide 49)
+
+
+

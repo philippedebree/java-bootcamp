@@ -1,0 +1,30 @@
+9-11-2026 DTO, Validation and API Contracts
+
+DTO
+    - Act as a contract between your API and its consumers
+    - expose only what's needed
+    - loose coupling - stable contract, decouple API from internal models
+    - better performance - smaller payloads
+    - easier evolution and versioning
+
+Entity vs DTO (slide 6)
+    - Entity: represents the data model in your application, often tied to the database schema
+    - DTO: communicates data safely and efficiently
+
+Request DTO Design (slide 10)
+    - captures the data sent by the client for a specific operation, validates input and protects your domain model
+    - client supplies just what it's allowed to set
+    - Validation-ready, annotate fields with Jakarta validation constraints
+        - eg @NotBlank String fullName
+    - use separate create, replace, and patch contracts when their required fields or semantics differ
+    - over-posting protection, never bind server-controlled or internal fields with client input
+
+Response DTO Design (slide 12)
+    - defines the data returned after a request is processed - consistent, secure, efficient
+
+Mapping strategies (slide 15)
+    - convert entities to DTOs (and back) using the right approach
+        - Manual Mapping
+        - ModelMapper
+        - MapStruct
+        - Legacy reflection tools
